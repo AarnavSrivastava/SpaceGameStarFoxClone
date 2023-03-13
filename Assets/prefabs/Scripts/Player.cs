@@ -12,8 +12,6 @@ public class Player : MonoBehaviour
     public GameObject engine1;
     public GameObject engine2;
 
-    public GameObject reticle;
-
     float velocityxy = 100;
     float velocityz = 10;
 
@@ -27,14 +25,29 @@ public class Player : MonoBehaviour
     void Update()
     {
         rigidbody.AddForce(Vector3.forward * velocityz, ForceMode.Impulse);
+
+        if (!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
+        {
+            setOrigRotY();
+        }
+
+        if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+        {
+            setOrigRotX();
+        }
+
         if (Input.GetKey(KeyCode.W) && transform.position.y < 15f)
         {
             rigidbody.AddForce(Vector3.up * velocityxy, ForceMode.Acceleration);
+            transform.rotation = Quaternion.Lerp(transform.rotation, new Quaternion(-0.173648253f, transform.rotation.y, transform.rotation.z, 0.984807789f), Time.deltaTime * 5);
+
         }
         else if (transform.position.y >= 15)
         {
             rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
             transform.position = new Vector3(transform.position.x, 15f, transform.position.z);
+
+            setOrigRotY();
         }
         else
         {
@@ -44,11 +57,16 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.S) && transform.position.y > -15f)
         {
             rigidbody.AddForce(Vector3.down * velocityxy, ForceMode.Acceleration);
+            transform.rotation = Quaternion.Lerp(transform.rotation, new Quaternion(0.173648164f, transform.rotation.y, transform.rotation.z, 0.984807789f), Time.deltaTime * 5);
+
         }
         else if (transform.position.y <= -15f)
         {
             rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
             transform.position = new Vector3(transform.position.x, -15f, transform.position.z);
+
+            setOrigRotY();
+
         }
         else
         {
@@ -58,11 +76,15 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.A) && transform.position.x > -30)
         {
             rigidbody.AddForce(Vector3.left * velocityxy, ForceMode.Acceleration);
+
+            transform.rotation = Quaternion.Lerp(transform.rotation, new Quaternion(-0.0560186803f, -0.209064513f, 0.252684087f, 0.943029583f), Time.deltaTime * 5);
         }
         else if (transform.position.x <= -30)
         {
             rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, rigidbody.velocity.z);
             transform.position = new Vector3(-30, transform.position.y, transform.position.z);
+
+            setOrigRotX();
         }
         else
         {
@@ -72,11 +94,15 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.D) && transform.position.x < 30)
         {
             rigidbody.AddForce(Vector3.right * velocityxy, ForceMode.Acceleration);
+
+            transform.rotation = Quaternion.Lerp(transform.rotation, new Quaternion(-0.0560186803f, 0.209064603f, -0.252683967f, 0.943029583f), Time.deltaTime * 5);
         }
         else if (transform.position.x >= 30)
         {
             rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, rigidbody.velocity.z);
             transform.position = new Vector3(30, transform.position.y, transform.position.z);
+
+            setOrigRotX();
         }
         else
         {
@@ -108,11 +134,7 @@ public class Player : MonoBehaviour
             setMax();
         }
 
-        var rotationAngle = Quaternion.LookRotation(reticle.transform.position - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotationAngle, Time.deltaTime * 10);
-
-        camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, transform.position.z - 40);
-        reticle.transform.position = new Vector3(reticle.transform.position.x, reticle.transform.position.y, transform.position.z + 50);
+        //camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, transform.position.z - 40);
     }
 
     void setMin()
@@ -125,5 +147,15 @@ public class Player : MonoBehaviour
     {
         engine1.GetComponent<ParticleSystem>().startSize = 7;
         engine2.GetComponent<ParticleSystem>().startSize = 7;
+    }
+
+    void setOrigRotX()
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, new Quaternion(transform.rotation.x, 0, 0, 1), Time.deltaTime * 2.5f);
+    }
+
+    void setOrigRotY()
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, new Quaternion(0, transform.rotation.y, transform.rotation.z, 1), Time.deltaTime * 2.5f);
     }
 }
