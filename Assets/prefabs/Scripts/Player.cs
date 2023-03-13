@@ -83,16 +83,29 @@ public class Player : MonoBehaviour
             rigidbody.velocity = rigidbody.velocity * 0.95f * Time.deltaTime;
         }
 
-        if (!Input.anyKey)
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            if (velocityz < 25)
+            {
+                velocityz += 5f * Time.deltaTime;
+            }
+        }
+
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            if (velocityz > 5)
+            {
+                velocityz -= 5f * Time.deltaTime;
+            }
+        }
+
+        if (velocityz < 7.5f)
         {
             setMin();
         }
         else
-            setMax();
-
-        if (Input.GetKey(KeyCode.Space))
         {
-            velocityz = rigidbody.velocity * 0.95f * Time.deltaTime;
+            setMax();
         }
 
         var rotationAngle = Quaternion.LookRotation(reticle.transform.position - transform.position);
