@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public GameObject engine1;
     public GameObject engine2;
 
-    float velocityxy = 100;
+    float velocityxy = 200;
     float velocityz = 10;
 
     // Start is called before the first frame update
@@ -134,7 +134,23 @@ public class Player : MonoBehaviour
             setMax();
         }
 
-        //camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, transform.position.z - 40);
+        camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, transform.position.z - 30);
+
+        if (camera.transform.position.x <= 5 && camera.transform.position.x >= -5)
+        {
+            camera.transform.position = Vector3.Lerp(camera.transform.position, new Vector3(transform.position.x, transform.position.y, camera.transform.position.z), Time.deltaTime*0.5f);
+        }
+        else
+        {
+            if (camera.transform.position.x < 0)
+            {
+                camera.transform.position = new Vector3(camera.transform.position.x + 0.01f, camera.transform.position.y, camera.transform.position.z);
+            }
+            else {
+                camera.transform.position = new Vector3(camera.transform.position.x - 0.01f, camera.transform.position.y, camera.transform.position.z);
+
+            }
+        }
     }
 
     void setMin()
