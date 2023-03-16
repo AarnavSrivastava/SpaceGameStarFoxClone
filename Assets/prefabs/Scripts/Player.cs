@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rigidbody.AddForce(Vector3.forward * velocityz, ForceMode.Impulse);
+        rigidbody.AddForce(Vector3.forward * velocityz * 75, ForceMode.Acceleration);
 
         if (!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
         {
@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
             rigidbody.velocity = rigidbody.velocity * 0.95f * Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.S) && transform.position.y > -15f)
+        if (Input.GetKey(KeyCode.S) && transform.position.y > -14.9f)
         {
             rigidbody.AddForce(Vector3.down * velocityxy, ForceMode.Acceleration);
             transform.rotation = Quaternion.Lerp(transform.rotation, new Quaternion(0.173648164f, transform.rotation.y, transform.rotation.z, 0.984807789f), Time.deltaTime * 5);
@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
         {
             rigidbody.AddForce(Vector3.left * velocityxy, ForceMode.Acceleration);
 
-            transform.rotation = Quaternion.Lerp(transform.rotation, new Quaternion(-0.0560186803f, -0.209064513f, 0.252684087f, 0.943029583f), Time.deltaTime * 5);
+            transform.rotation = Quaternion.Lerp(transform.rotation, new Quaternion(transform.rotation.x, transform.rotation.y, 0.173648164f,0.984807789f), Time.deltaTime * 5);
         }
         else if (transform.position.x <= -30)
         {
@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
         {
             rigidbody.AddForce(Vector3.right * velocityxy, ForceMode.Acceleration);
 
-            transform.rotation = Quaternion.Lerp(transform.rotation, new Quaternion(-0.0560186803f, 0.209064603f, -0.252683967f, 0.943029583f), Time.deltaTime * 5);
+            transform.rotation = Quaternion.Lerp(transform.rotation, new Quaternion(transform.rotation.x, transform.rotation.y, -0.173648253f, 0.984807789f), Time.deltaTime * 5);
         }
         else if (transform.position.x >= 30)
         {
@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
             rigidbody.velocity = rigidbody.velocity * 0.95f * Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.E))
         {
             if (velocityz < 25)
             {
@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.Q))
         {
             if (velocityz > 5)
             {
@@ -134,7 +134,7 @@ public class Player : MonoBehaviour
             setMax();
         }
 
-        camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, transform.position.z - 30);
+        camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, transform.position.z - 40);
 
         if (camera.transform.position.x <= 5 && camera.transform.position.x >= -5)
         {

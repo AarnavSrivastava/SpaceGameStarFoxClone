@@ -5,37 +5,68 @@ using UnityEngine;
 public class Shot : MonoBehaviour
 {
     public GameObject missle;
-    public GameObject SpawnLeft;
-    public GameObject SpawnRight;
+    public GameObject bullet;
 
-    List<GameObject> spawns;
-    bool fired = false;
-    int offset = 0;
-    int t = 0;
+    public GameObject SpawnLeftMissile;
+    public GameObject SpawnRightMissle;
+
+    public GameObject SpawnLeftBullet;
+    public GameObject SpawnRightBullet;
+
+    GameObject[] SpawnMissle;
+    bool firedMissle = false;
+    int offsetMissle = 0;
+    int tMissle = 0;
+
+    GameObject[] SpawnBullet;
+    bool firedBullet = false;
+    int tBullet = 0;
     // Start is called before the first frame update
     void Start()
     {
-        spawns.Add(SpawnLeft);
-        spawns.Add(SpawnRight);
+        SpawnMissle = new GameObject[2];
+        SpawnMissle[0] = SpawnLeftMissile;
+        SpawnMissle[1] = SpawnRightMissle;
+
+        SpawnBullet = new GameObject[2];
+        SpawnBullet[0] = SpawnLeftBullet;
+        SpawnBullet[1] = SpawnRightBullet;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !fired)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !firedMissle)
         {
-            Instantiate(missle, new Vector3(spawns[offset].transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-            fired = true;
-            offset = (offset == 1) ? 0 : 1;
+            Instantiate(missle, SpawnMissle[offsetMissle].transform.position, Quaternion.identity);
+            firedMissle = true;
+            offsetMissle = (offsetMissle == 1) ? 0 : 1;
         }
 
-        if (fired)
+        if (firedMissle)
         {
-            t++;
-            if (t == 200)
+            tMissle++;
+            if (tMissle == 200)
             {
-                fired = false;
-                t = 0;
+                firedMissle = false;
+                tMissle = 0;
+            }
+        }
+
+        if (Input.GetKey(KeyCode.Mouse0) && !firedBullet)
+        {
+            Instantiate(bullet, SpawnBullet[0].transform.position, Quaternion.identity);
+            Instantiate(bullet, SpawnBullet[1].transform.position, Quaternion.identity);
+            firedBullet = true;
+        }
+
+        if (firedBullet)
+        {
+            tBullet++;
+            if (tBullet == 50)
+            {
+                firedBullet = false;
+                tBullet = 0;
             }
         }
     }
