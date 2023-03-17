@@ -13,11 +13,17 @@ public class Missile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.GetChild(0).gameObject.GetComponent<Rigidbody>().AddForce(Vector3.forward * 100, ForceMode.Acceleration);
+        transform.GetChild(0).gameObject.GetComponent<Rigidbody>().AddForce(Vector3.forward * 300, ForceMode.Acceleration);
 
         if (transform.position.z > GameObject.Find("Player").transform.position.z + 50)
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag != "Player")
+            Destroy(gameObject);
     }
 }

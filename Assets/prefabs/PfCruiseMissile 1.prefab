@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7732430379066397086}
   m_Layer: 0
   m_Name: PfCruiseMissile 1
-  m_TagString: Untagged
+  m_TagString: Missile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,6 +124,10 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 4ab581e06f3b88042b9154887d4c359e, type: 3}
       propertyPath: m_Name
       value: CruiseMissile
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4ab581e06f3b88042b9154887d4c359e, type: 3}
+      propertyPath: m_TagString
+      value: Missile
       objectReference: {fileID: 0}
     - target: {fileID: 5575115065722428287, guid: 4ab581e06f3b88042b9154887d4c359e, type: 3}
       propertyPath: m_Materials.Array.data[0]

@@ -38,7 +38,7 @@ public class Shot : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse1) && !firedMissle)
         {
-            Instantiate(missle, SpawnMissle[offsetMissle].transform.position, Quaternion.identity);
+            Instantiate(missle, new Vector3(SpawnMissle[offsetMissle].transform.position.x, SpawnMissle[offsetMissle].transform.position.y, SpawnMissle[offsetMissle].transform.position.z + 5), Quaternion.identity);
             firedMissle = true;
             offsetMissle = (offsetMissle == 1) ? 0 : 1;
         }
@@ -55,15 +55,15 @@ public class Shot : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Mouse0) && !firedBullet)
         {
-            Instantiate(bullet, SpawnBullet[0].transform.position, Quaternion.identity);
-            Instantiate(bullet, SpawnBullet[1].transform.position, Quaternion.identity);
+            Instantiate(bullet, new Vector3(SpawnBullet[0].transform.position.x, SpawnBullet[0].transform.position.y, SpawnBullet[0].transform.position.z + 3), Quaternion.identity);
+            Instantiate(bullet, new Vector3(SpawnBullet[1].transform.position.x, SpawnBullet[1].transform.position.y, SpawnBullet[1].transform.position.z + 3), Quaternion.identity);
             firedBullet = true;
         }
 
         if (firedBullet)
         {
             tBullet++;
-            if (tBullet == 50)
+            if (tBullet == 60)
             {
                 firedBullet = false;
                 tBullet = 0;

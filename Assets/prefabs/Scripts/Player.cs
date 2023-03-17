@@ -7,6 +7,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Camera camera;
+    public GameObject spawn;
+
     Rigidbody rigidbody;
 
     public GameObject engine1;
@@ -24,6 +26,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(rigidbody.velocity.z);
         rigidbody.AddForce(Vector3.forward * velocityz * 75, ForceMode.Acceleration);
 
         if (!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
@@ -151,6 +154,8 @@ public class Player : MonoBehaviour
 
             }
         }
+
+        spawn.transform.position = new Vector3(spawn.transform.position.x, spawn.transform.position.y, transform.position.z + 500);
     }
 
     void setMin()
