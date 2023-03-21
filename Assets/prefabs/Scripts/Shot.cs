@@ -36,37 +36,40 @@ public class Shot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && !firedMissle)
+        if (Player.alive)
         {
-            Instantiate(missle, new Vector3(SpawnMissle[offsetMissle].transform.position.x, SpawnMissle[offsetMissle].transform.position.y, SpawnMissle[offsetMissle].transform.position.z + 5), Quaternion.identity);
-            firedMissle = true;
-            offsetMissle = (offsetMissle == 1) ? 0 : 1;
-        }
-
-        if (firedMissle)
-        {
-            tMissle++;
-            if (tMissle == 200)
+            if (Input.GetKeyDown(KeyCode.Mouse1) && !firedMissle)
             {
-                firedMissle = false;
-                tMissle = 0;
+                Instantiate(missle, new Vector3(SpawnMissle[offsetMissle].transform.position.x, SpawnMissle[offsetMissle].transform.position.y, SpawnMissle[offsetMissle].transform.position.z + 5), Quaternion.identity);
+                firedMissle = true;
+                offsetMissle = (offsetMissle == 1) ? 0 : 1;
             }
-        }
 
-        if (Input.GetKey(KeyCode.Mouse0) && !firedBullet)
-        {
-            Instantiate(bullet, new Vector3(SpawnBullet[0].transform.position.x, SpawnBullet[0].transform.position.y, SpawnBullet[0].transform.position.z + 3), Quaternion.identity);
-            Instantiate(bullet, new Vector3(SpawnBullet[1].transform.position.x, SpawnBullet[1].transform.position.y, SpawnBullet[1].transform.position.z + 3), Quaternion.identity);
-            firedBullet = true;
-        }
-
-        if (firedBullet)
-        {
-            tBullet++;
-            if (tBullet == 60)
+            if (firedMissle)
             {
-                firedBullet = false;
-                tBullet = 0;
+                tMissle++;
+                if (tMissle == 200)
+                {
+                    firedMissle = false;
+                    tMissle = 0;
+                }
+            }
+
+            if (Input.GetKey(KeyCode.Mouse0) && !firedBullet)
+            {
+                Instantiate(bullet, new Vector3(SpawnBullet[0].transform.position.x, SpawnBullet[0].transform.position.y, SpawnBullet[0].transform.position.z + 3), Quaternion.identity);
+                Instantiate(bullet, new Vector3(SpawnBullet[1].transform.position.x, SpawnBullet[1].transform.position.y, SpawnBullet[1].transform.position.z + 3), Quaternion.identity);
+                firedBullet = true;
+            }
+
+            if (firedBullet)
+            {
+                tBullet++;
+                if (tBullet == 60)
+                {
+                    firedBullet = false;
+                    tBullet = 0;
+                }
             }
         }
     }

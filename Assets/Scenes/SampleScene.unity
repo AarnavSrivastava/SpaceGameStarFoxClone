@@ -327,6 +327,10 @@ PrefabInstance:
       propertyPath: InitialModule.startSize.scalar
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8205259508477440742, guid: 395c2c0e76554e14d99631be84b4b351, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8941680702168865419, guid: 395c2c0e76554e14d99631be84b4b351, type: 3}
       propertyPath: m_Name
       value: Player
@@ -721,7 +725,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Score: 0'
+  m_Text: 'Score: 0
+
+    Health: 3'
 --- !u!222 &2093225885
 CanvasRenderer:
   m_ObjectHideFlags: 0

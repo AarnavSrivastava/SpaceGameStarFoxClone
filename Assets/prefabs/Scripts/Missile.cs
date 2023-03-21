@@ -17,13 +17,13 @@ public class Missile : MonoBehaviour
 
         if (transform.position.z > GameObject.Find("Player").transform.position.z + 50)
         {
-            Destroy(gameObject);
+            Destroy(gameObject.transform.parent);
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag != "Player")
-            Destroy(gameObject);
+            Destroy(gameObject.transform.parent);
     }
 }

@@ -8,8 +8,11 @@ public class Enemy : MonoBehaviour
     public GameObject impact;
     public GameObject explosion;
     public Material damaged;
-    int health = 10;
+
+    [SerializeField]
+    int health;
     bool notDestroyed = true;
+    bool hasCollide = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,11 +31,9 @@ public class Enemy : MonoBehaviour
 
             notDestroyed = false;
 
-            int score = int.Parse(GameObject.Find("Canvas").GetComponent<Text>().text.Substring(7));
+            Player.score++;
 
-            score++;
-
-            GameObject.Find("Canvas").GetComponent<Text>().text = "Score: " + score;
+            GameObject.Find("Canvas").GetComponent<Text>().text = "Score: " + Player.score + "\nHealth: " + Player.health;
         }
 
         if (transform.position.z <= GameObject.Find("Player").transform.position.z-50)
@@ -44,15 +45,30 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Missile")
         {
+            GameObject impact_instant = Instantiate(impact, collision.transform);
+            impact_instant.transform.SetParent(transform, true);
+
             health -= 10;
         }
         if (collision.gameObject.tag == "Bullet")
         {
-            health -= 1;
+            health -= 2;
 
-            Instantiate(impact, transform);
+            GameObject impact_instant = Instantiate(impact, collision.transform);
+            impact_instant.transform.SetParent(transform, true);
 
             gameObject.GetComponent<Material>();
+        }
+
+        if (collision.gameObject.tag == "Player" && !hasCollide)
+        {
+            health = 0;
+
+            Player.health--;
+
+            GameObject.Find("Canvas").GetComponent<Text>().text = "Score: " + Player.score + "\nHealth: " + Player.health;
+
+            hasCollide = true;
         }
     }
 }

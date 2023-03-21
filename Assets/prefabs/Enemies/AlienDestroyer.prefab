@@ -4883,6 +4883,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impact: {fileID: 8038344524183138613, guid: 11651b1cf170dd6439a7cb50f78319d5, type: 3}
   explosion: {fileID: 1121192042590650, guid: b161110064a276641b4a8a2878b27f65, type: 3}
+  damaged: {fileID: 0}
+  health: 20
 --- !u!54 &-1998280497764494944
 Rigidbody:
   m_ObjectHideFlags: 0
